@@ -1,34 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Customers</title>
-    </head>
-    <body>
-        <h1>Customers</h1>
-        <h5><a href="{% url "customers:customer-add" %}">Add Customer</a></h5>
-        <table>
-            <thead>
+{% extends 'base.html' %}
+{% load customers_tags %}
+
+{% block title %}Customers{% endblock %}
+
+{% block body %}
+    <h1>Customers</h1>
+    <h5><a href="{% url "customers:customer-add" %}">Add Customer</a></h5>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Created At</th>
+                <th>Modified At</th>
+                <th>Email</th>
+                <th>Username</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
                 <tr>
-                    <th>Name</th>
-                    <th>Created At</th>
-                    <th>Modified At</th>
-                    <th>Email</th>
-                    <th>Username</th>
+                    <td><a href="{% url "customers:customer-update" pk=customer.pk %}">{% get_customer_full_name customer %}</a></td>
+                    <td>{{ customer.created_at }}</td>
+                    <td>{{ customer.modified_at }}</td>
+                    <td>{{ customer.user.email }}</td>
+                    <td>{{ customer.user.username }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                {% for customer in customers %}
-                <tr>
-                        <td><a href="{% url "customers:customer-update" pk=customer.pk %}">{{ customer.user.first_name }} {{ customer.user.last_name }}</a></td>
-                        <td>{{ customer.created_at }}</td>
-                        <td>{{ customer.modified_at }}</td>
-                        <td>{{ customer.user.email }}</td>
-                        <td>{{ customer.user.username }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </body>
-</html>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

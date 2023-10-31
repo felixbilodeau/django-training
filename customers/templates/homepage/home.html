@@ -1,0 +1,7 @@
+{% extends 'homepage/home.html' %}
+{% block title %}Home{% endblock %}
+
+{% block index_urls %}
+    {{ block.super }}
+    <h3><a href="{% url "customers:index" %}">Customers</a></h3>
+{% endblock %}

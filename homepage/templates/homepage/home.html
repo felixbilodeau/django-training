@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Django Training!</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <h1>Homepage</h1>
+    {% block index_urls %}
         <h3><a href="{% url "home:homepage" %}">Home</a></h3>
-        <h3><a href="{% url "customers:index" %}">Customers</a></h3>
-        <h3><a href="{% url "admin:index" %}">Admin</a></h3>
-    </body>
-</html>
+    {% endblock %}
+{% endblock %}
