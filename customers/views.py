@@ -3,6 +3,8 @@ from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_http_methods
 from django.urls import reverse
 
+from audit.signals import model_saved
+
 from .forms import CustomerCreateForm, CustomerUpdateForm
 from .models import Customer
 
@@ -44,5 +46,7 @@ def add_customer_get(request, form):
 def add_customer_post(request, form):
     if form.is_valid():
         customer = form.save()
+        # normally send user as well but it's not set up
+        model_saved.send(Customer, instance=customer, action='created')  # Sends the model_saved signal
         return HttpResponseRedirect(reverse('customers:customer-update', args=[customer.pk]))
     return render(request, 'customers/customer_add.html', {'form': form})

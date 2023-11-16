@@ -3,6 +3,11 @@ from django.db import models
 
 User = get_user_model()
 
+CUSTOMER_AUDIT_ACTION_CHOICES = (
+    ('created', 'Created'),
+    ('modified', 'Modified'),
+)
+
 
 # Create your models here.
 class Customer(models.Model):
@@ -23,4 +28,10 @@ class CustomerAudit(models.Model):
         on_delete=models.CASCADE,
         related_name='audits',
         verbose_name='Customer',
+    )
+    action = models.CharField(
+        'Action',
+        max_length=50,
+        choices=CUSTOMER_AUDIT_ACTION_CHOICES,
+        default='modified',
     )

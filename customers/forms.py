@@ -79,4 +79,5 @@ class CustomerUpdateForm(forms.Form):
         user.email = self.cleaned_data['email']
         user.username = self.cleaned_data['username']
         user.save()
+        self.instance.save()
         return self.instance
