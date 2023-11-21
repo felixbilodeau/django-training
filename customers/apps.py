@@ -8,3 +8,6 @@ class CustomersConfig(AppConfig):
 
     def ready(self):
         from . import receivers
+
+        from .injector import override
+        override()

@@ -2,8 +2,10 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-    <h1>Homepage</h1>
+    <h1>{{ title }}</h1>
     {% block index_urls %}
-        <h3><a href="{% url "home:homepage" %}">Home</a></h3>
+        {% for key, item in homepage_urls.items %}
+            <h3><a href="{{ item }}">{{ key }}</a></h3>
+        {% endfor %}
     {% endblock %}
 {% endblock %}

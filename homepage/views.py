@@ -1,5 +1,14 @@
 from django.shortcuts import render
 
-# Create your views here.
+from .containers import container
+
+
 def homepage(request):
-    return render(request, 'homepage/home.html')
+    return render(
+        request,
+        'homepage/home.html',
+        {
+            'title': container.homepage_title,
+            'homepage_urls': container.homepage_urls,
+        }
+    )
